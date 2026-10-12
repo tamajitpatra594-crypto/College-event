@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eventrix &mdash; Department of CSE (AIML), IEM Kolkata</title>
+  <meta name="description" content="Eventrix: The premier event management hub for the Department of CSE (AIML), Institute of Engineering &amp; Management (IEM), Kolkata. Upcoming hackathons, workshops, cultural nights, and tech fests.">
+  <link rel="icon" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Ambient Glow Effects -->
+  <div class="ambient-glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow-2" aria-hidden="true"></div>
+
+  <!-- ===================== HEADER / NAVIGATION ===================== -->
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a href="#top" class="brand" aria-label="Eventrix Home">
+        <div class="brand-badge">
+          <div class="brand-badge-inner">
+            <img src="images/logo.png" alt="IEM logo" class="brand-logo">
+          </div>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">EVENTRIX<span class="dot">.</span></span>
+          <span class="brand-sub">CSE (AIML) · IEM Kolkata</span>
+        </div>
+      </a>
+
+      <nav class="site-nav" id="siteNav">
+        <a href="#home">Home</a>
+        <a href="#events">Events</a>
+        <a href="#register">Register</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode" title="Toggle theme">
+          <span class="theme-icon" aria-hidden="true">☀</span>
+        </button>
+        <a href="#register" class="btn btn-primary btn-sm" style="display: none;" id="navRegisterBtn">Register</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="siteNav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===================== HOME / HERO ===================== -->
+    <section class="hero" id="home">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <div class="hero-pill">
+            <span class="pill-pulse"></span> Odd Semester 2026–27 · IEM Kolkata
+          </div>
+          <h1>Ignite the Future at <span class="text-gradient">Eventrix</span></h1>
+          <p class="hero-tagline">Department of Computer Science &amp; Engineering (AIML)</p>
+          <p class="hero-lead">
+            Where breakthrough artificial intelligence, competitive hacking, hands-on workshops,
+            and vibrant cultural traditions unite. Explore the semester calendar and claim your stage.
+          </p>
+          <div class="hero-actions">
+            <a href="#events" class="btn btn-primary">Explore Events <span aria-hidden="true">→</span></a>
+            <a href="#register" class="btn btn-ghost">Register Now</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number gradient">6+</span>
+              <span class="stat-label">Flagship Events</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">1.2K+</span>
+              <span class="stat-label">Participants</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number gradient">24h</span>
+              <span class="stat-label">AI Hackathon</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">₹75K+</span>
+              <span class="stat-label">Prizes &amp; Grants</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- JS feature 1: live countdown to the next event -->
+        <aside class="countdown-card" aria-live="polite">
+          <div class="countdown-top">
+            <span class="countdown-label">Next Up</span>
+            <span class="countdown-status"><span class="status-dot"></span> LIVE COUNTDOWN</span>
+          </div>
+          <h2 class="countdown-title" id="cdTitle">Loading…</h2>
+          <p class="countdown-meta" id="cdMeta"></p>
+          <div class="countdown" id="countdown">
+            <div><span id="cdDays">00</span><small>days</small></div>
+            <div><span id="cdHours">00</span><small>hours</small></div>
+            <div><span id="cdMins">00</span><small>minutes</small></div>
+            <div><span id="cdSecs">00</span><small>seconds</small></div>
+          </div>
+          <!-- JS feature 2: digital clock -->
+          <div class="clock-bar">
+            <span>Kolkata Studio Clock (IST)</span>
+            <time id="clock">--:--:--</time>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===================== EVENTS ===================== -->
+    <section class="section" id="events">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-kicker">✦ Semester Calendar</span>
+          <h2>Featured Events</h2>
+          <p>Filter by category or search through all department events scheduled this semester.</p>
+        </div>
+
+        <!-- JS feature 3: dynamic event filtering & live search -->
+        <div class="events-controls">
+          <div class="filters" id="eventFilters" role="group" aria-label="Filter events by category">
+            <button class="chip is-active" data-filter="all">All Events</button>
+            <button class="chip" data-filter="technical">Technical</button>
+            <button class="chip" data-filter="workshop">Workshops</button>
+            <button class="chip" data-filter="cultural">Cultural</button>
+            <button class="chip" data-filter="lecture">Lectures</button>
+          </div>
+          <div class="search-box">
+            <span class="search-icon" aria-hidden="true">🔍</span>
+            <input type="search" id="eventSearch" placeholder="Search by name or venue…" aria-label="Search events">
+          </div>
+        </div>
+
+        <ul class="event-list" id="eventList">
+          <!-- Rendered dynamically by js/script.js from the EVENTS array -->
+        </ul>
+        <p class="empty-note" id="eventEmpty" hidden>No events found matching your selection. Try a different filter or search term.</p>
+      </div>
+    </section>
+
+    <!-- ===================== REGISTRATION ===================== -->
+    <section class="section section-tinted" id="register">
+      <div class="wrap form-grid">
+        <div class="form-info-card">
+          <div class="section-head" style="margin-bottom: 1.5rem;">
+            <span class="section-kicker">✦ Easy Entry</span>
+            <h2>Register for an Event</h2>
+            <p>
+              Open to all engineering students of IEM Kolkata. Simple, fast registration with official college roll verification.
+            </p>
+          </div>
+
+          <ul class="form-perks">
+            <li>
+              <span class="perk-icon">✓</span>
+              <div>
+                <strong>Official IEM Roll Number</strong><br>
+                Provide your 10-digit roll number for instant attendance and credit verification.
+              </div>
+            </li>
+            <li>
+              <span class="perk-icon">✓</span>
+              <div>
+                <strong>Instant Email Confirmation</strong><br>
+                Receipt details, guidelines, and venue entry passes sent to your email.
+              </div>
+            </li>
+            <li>
+              <span class="perk-icon">✓</span>
+              <div>
+                <strong>Team Events Policy</strong><br>
+                For team hackathons and robot challenges, each team member registers individually.
+              </div>
+            </li>
+            <li>
+              <span class="perk-icon">✓</span>
+              <div>
+                <strong>Certificates &amp; Mentorship</strong><br>
+                All participants receive verified department certificates and faculty mentorship.
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- JS feature 4: form validation -->
+        <form class="form" id="regForm" novalidate>
+          <h3>Student Registration Form</h3>
+
+          <div class="field">
+            <label for="studentName">Student Full Name</label>
+            <input type="text" id="studentName" name="studentName" placeholder="e.g. Ananya Sen" autocomplete="name">
+            <small class="error" id="err-studentName"></small>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="rollNo">IEM Roll Number</label>
+              <input type="text" id="rollNo" name="rollNo" inputmode="numeric" placeholder="10-digit roll no.">
+              <small class="error" id="err-rollNo"></small>
+            </div>
+            <div class="field">
+              <label for="department">Department / Branch</label>
+              <select id="department" name="department">
+                <option value="">Select department</option>
+                <option>CSE (AIML)</option>
+                <option>CSE</option>
+                <option>CSBS</option>
+                <option>IT</option>
+                <option>ECE</option>
+                <option>EE</option>
+                <option>ME</option>
+                <option>CE</option>
+              </select>
+              <small class="error" id="err-department"></small>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="email">College / Personal Email</label>
+              <input type="email" id="email" name="email" placeholder="you@iem.edu.in" autocomplete="email">
+              <small class="error" id="err-email"></small>
+            </div>
+            <div class="field">
+              <label for="phone">Mobile Number</label>
+              <input type="tel" id="phone" name="phone" inputmode="tel" placeholder="10-digit mobile number" autocomplete="tel">
+              <small class="error" id="err-phone"></small>
+            </div>
+          </div>
+
+          <fieldset class="field">
+            <legend>Gender</legend>
+            <div class="radio-row" id="genderGroup">
+              <label><input type="radio" name="gender" value="Female"> Female</label>
+              <label><input type="radio" name="gender" value="Male"> Male</label>
+              <label><input type="radio" name="gender" value="Other"> Other</label>
+              <label><input type="radio" name="gender" value="Prefer not to say"> Prefer not to say</label>
+            </div>
+            <small class="error" id="err-gender"></small>
+          </fieldset>
+
+          <div class="field">
+            <label for="eventSelect">Select Event</label>
+            <select id="eventSelect" name="eventSelect">
+              <option value="">Choose an event to attend</option>
+              <!-- Options populated dynamically by js/script.js -->
+            </select>
+            <small class="error" id="err-eventSelect"></small>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Confirm &amp; Submit Registration</button>
+          <p class="form-status" id="regStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===================== GALLERY ===================== -->
+    <section class="section" id="gallery">
+      <div class="wrap">
+        <div class="section-head center">
+          <span class="section-kicker">✦ Visual Highlights</span>
+          <h2>Campus Moments &amp; Gallery</h2>
+          <p>Snapshots from hackathons, robotics arenas, tech exhibitions, and cultural showcases. Click to enlarge.</p>
+        </div>
+
+        <div class="gallery" id="galleryGrid">
+          <figure class="gallery-item" tabindex="0" role="button" aria-label="HackIEM 2025 &mdash; 24-hour hackathon">
+            <img src="images/hackathon.jpg" alt="Students working at laptops during the 24-hour hackathon" loading="lazy">
+            <figcaption>HackIEM 2025 &mdash; 24-Hour AI Hackathon</figcaption>
+          </figure>
+          <figure class="gallery-item" tabindex="0" role="button" aria-label="Innovacion &mdash; annual tech fest">
+            <img src="images/tech-fest.jpg" alt="Crowd at the annual tech fest opening" loading="lazy">
+            <figcaption>Innovacion &mdash; Annual Tech Fest</figcaption>
+          </figure>
+          <figure class="gallery-item" tabindex="0" role="button" aria-label="Deep learning workshop, AIML lab">
+            <img src="images/workshop.jpg" alt="Hands-on machine learning workshop in the AIML lab" loading="lazy">
+            <figcaption>Deep Learning Workshop, AIML Lab</figcaption>
+          </figure>
+          <figure class="gallery-item" tabindex="0" role="button" aria-label="Cultural night &mdash; department stage">
+            <img src="images/cultural-night.jpg" alt="Stage performance during the cultural night" loading="lazy">
+            <figcaption>Cultural Night &mdash; Department Stage</figcaption>
+          </figure>
+          <figure class="gallery-item" tabindex="0" role="button" aria-label="Line-follower robotics challenge">
+            <img src="images/robotics.jpg" alt="Robot on the line-follower track at the robotics challenge" loading="lazy">
+            <figcaption>Line-Follower Robotics Arena</figcaption>
+          </figure>
+          <figure class="gallery-item" tabindex="0" role="button" aria-label="Industry guest lecture, seminar hall">
+            <img src="images/guest-lecture.jpg" alt="Guest speaker addressing students in the seminar hall" loading="lazy">
+            <figcaption>Industry Guest Lecture, Seminar Hall</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Image Preview">
+      <div class="lightbox-content">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close preview">✕</button>
+        <img src="" alt="" class="lightbox-img" id="lightboxImg">
+        <p class="lightbox-caption" id="lightboxCaption"></p>
+      </div>
+    </div>
+
+    <!-- ===================== ABOUT US ===================== -->
+    <section class="section section-tinted" id="about">
+      <div class="wrap about-grid">
+        <div class="about-card">
+          <div class="section-head" style="margin-bottom: 1.5rem;">
+            <span class="section-kicker">✦ Academic Excellence</span>
+            <h2>About CSE (AIML)</h2>
+          </div>
+          <p>
+            The Department of Computer Science &amp; Engineering (Artificial Intelligence and
+            Machine Learning) at the Institute of Engineering &amp; Management (IEM), Kolkata, offers
+            a forward-looking four-year B.Tech programme immersed in machine intelligence, deep learning,
+            natural language processing, and advanced robotics.
+          </p>
+          <p>
+            Equipped with state-of-the-art AIML and IoT research laboratories, the department collaborates
+            vigorously with industry leaders, the IETE Student Forum, and the IEM Innovation Cell.
+            Through Eventrix, we nurture real-world engineering excellence, creative collaboration, and student leadership.
+          </p>
+        </div>
+
+        <div class="coordinators-grid">
+          <div class="coord-card">
+            <div class="coord-avatar">SB</div>
+            <div class="coord-info">
+              <span class="coord-role">Faculty Coordinator</span>
+              <span class="coord-name">Dr. Sudipta Bhattacharya</span>
+              <span class="coord-dept">Associate Professor, CSE (AIML)</span>
+            </div>
+          </div>
+          <div class="coord-card">
+            <div class="coord-avatar">RD</div>
+            <div class="coord-info">
+              <span class="coord-role">Student Coordinator</span>
+              <span class="coord-name">Ritwika Das</span>
+              <span class="coord-dept">3rd Year, CSE (AIML)</span>
+            </div>
+          </div>
+          <div class="coord-card">
+            <div class="coord-avatar">AM</div>
+            <div class="coord-info">
+              <span class="coord-role">Technical Lead</span>
+              <span class="coord-name">Arnab Mukherjee</span>
+              <span class="coord-dept">4th Year, CSE (AIML)</span>
+            </div>
+          </div>
+          <div class="coord-card">
+            <div class="coord-avatar">SR</div>
+            <div class="coord-info">
+              <span class="coord-role">Cultural Lead</span>
+              <span class="coord-name">Sneha Roy</span>
+              <span class="coord-dept">2nd Year, CSE (AIML)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONTACT & FEEDBACK ===================== -->
+    <section class="section" id="contact">
+      <div class="wrap contact-grid">
+        <div>
+          <div class="section-head">
+            <span class="section-kicker">✦ Get In Touch</span>
+            <h2>Connect With Us</h2>
+            <p>Have inquiries regarding team registrations, event sponsorships, or workshop kits? We are here to help.</p>
+          </div>
+
+          <div class="contact-cards">
+            <div class="contact-item">
+              <div class="contact-icon" aria-hidden="true">📍</div>
+              <div class="contact-text">
+                <strong>Department Campus</strong>
+                <p>
+                  Gurukul Campus, Y-12, Block EP, Sector V, Salt Lake<br>
+                  Kolkata 700091, West Bengal, India
+                </p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon" aria-hidden="true">✉</div>
+              <div class="contact-text">
+                <strong>Official Email</strong>
+                <a href="mailto:events.aiml@iem.edu.in">events.aiml@iem.edu.in</a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon" aria-hidden="true">📞</div>
+              <div class="contact-text">
+                <strong>Telephone Desk</strong>
+                <a href="tel:+913323572059">+91 33 2357 2059</a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon" aria-hidden="true">⏱</div>
+              <div class="contact-text">
+                <strong>Office Working Hours</strong>
+                <p>Monday – Friday, 10:00 – 17:00 IST</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form class="form" id="feedbackForm" novalidate>
+          <h3>Send Direct Feedback</h3>
+          <p style="font-size: 0.92rem; color: var(--ink-muted); margin-bottom: 1.25rem;">
+            Your thoughts power our events. Tell us what went great, ideas for upcoming tech tracks, or report an issue.
+          </p>
+
+          <div class="field">
+            <label for="fbName">Your Name</label>
+            <input type="text" id="fbName" name="fbName" placeholder="e.g. Ritwik Roy">
+            <small class="error" id="err-fbName"></small>
+          </div>
+          <div class="field">
+            <label for="fbEmail">Your Email</label>
+            <input type="email" id="fbEmail" name="fbEmail" placeholder="e.g. ritwik@iem.edu.in">
+            <small class="error" id="err-fbEmail"></small>
+          </div>
+          <div class="field">
+            <label for="fbMessage">Your Message / Suggestion</label>
+            <textarea id="fbMessage" name="fbMessage" rows="5" placeholder="Share your feedback, speaker ideas, or workshop preferences..."></textarea>
+            <small class="error" id="err-fbMessage"></small>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Transmit Feedback</button>
+          <p class="form-status" id="fbStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand">
+            <div class="brand-badge" style="width: 36px; height: 36px;">
+              <div class="brand-badge-inner">
+                <img src="images/logo.png" alt="IEM logo" style="width: 22px; height: 22px;">
+              </div>
+            </div>
+            <span class="brand-title" style="font-size: 1.2rem;">EVENTRIX<span class="dot">.</span></span>
+          </div>
+          <p>
+            Official event management and engagement platform of the Department of CSE (AIML),
+            Institute of Engineering &amp; Management, Kolkata.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#events">Upcoming Events</a></li>
+            <li><a href="#register">Register Online</a></li>
+            <li><a href="#gallery">Campus Gallery</a></li>
+            <li><a href="#about">About Department</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Academic Info</h4>
+          <ul class="footer-links">
+            <li><span style="color: var(--ink-soft);">Course: PCCCS382</span></li>
+            <li><span style="color: var(--ink-muted);">IT Workshop Project</span></li>
+            <li><span style="color: var(--ink-muted);">HTML5 · CSS3 · Vanilla JS</span></li>
+            <li><a href="#contact">Contact Coordinators</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Department of CSE (AIML), Institute of Engineering &amp; Management, Kolkata. All rights reserved.</p>
+        <a href="#top" class="back-top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Back to Top Button -->
+  <button class="float-top" id="floatTop" aria-label="Scroll back to top" title="Back to top">↑</button>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
